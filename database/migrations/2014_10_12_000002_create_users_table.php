@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('mobile', 10)->unique()->nullable();
             $table->string('gender')->default('Male');
             $table->string('dob', 10)->nullable();
-            $table->string('marital_status')->nullable();
+            $table->string('marital_status')->default('Single');
             $table->string('education')->nullable();
             $table->string('occupation')->nullable();
             $table->string('address')->nullable();
