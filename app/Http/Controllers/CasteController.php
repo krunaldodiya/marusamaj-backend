@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use App\Caste;
+use App\SubCaste;
 
 class CasteController extends Controller
 {
@@ -15,7 +15,7 @@ class CasteController extends Controller
 
     public function castes(Request $request)
     {
-        $castes = Caste::with('sub_castes')->get();
+        $castes = SubCaste::with('caste')->get();
 
         return ['castes' => $castes];
     }

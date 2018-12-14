@@ -12,4 +12,9 @@ class SubCaste extends Model
     ];
 
     protected $dates = ['created_at', 'updated_at'];
+
+    public function caste()
+    {
+        return $this->belongsTo(Caste::class);
+    }
 }
