@@ -14,6 +14,6 @@ Route::group(['prefix' => 'wallet', 'middleware' => 'auth:api'], function () {
     Route::post('/info', 'UserController@wallet');
 });
 
-Route::group(['prefix' => 'quiz', 'middleware' => 'auth:api'], function () {
-    Route::post('/all', 'QuizController@getAll');
+Route::group(['prefix' => 'castes', 'middleware' => 'auth:api'], function () {
+    Route::post('/', 'CasteController@castes');
 });

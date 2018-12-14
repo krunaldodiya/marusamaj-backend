@@ -20,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'father_name', 'mother_name', 'father_city', 'mother_city', 'caste', 'sub_caste',
+        'name', 'father_name', 'mother_name', 'father_city', 'mother_city', 'caste_id', 'sub_caste_id',
         'mobile', 'gender', 'dob', 'marital_status', 'education', 'occupation',
         'address', 'avatar', 'caste_updated', 'profile_updated', 'family_updated', 'created_at', 'updated_at'
     ];

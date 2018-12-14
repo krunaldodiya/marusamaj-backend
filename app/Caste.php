@@ -11,5 +11,10 @@ class Caste extends Model
         'name', 'created_at', 'updated_at',
     ];
 
+    public function sub_castes()
+    {
+        return $this->hasMany(SubCaste::class);
+    }
+
     protected $dates = ['created_at', 'updated_at'];
 }
