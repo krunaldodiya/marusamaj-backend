@@ -13,23 +13,24 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        $random = str_random(8);
-        $email = "$random@quizmonstr.com";
-        $password = bcrypt($random);
-
-        Schema::create('users', function (Blueprint $table) use ($email, $password) {
+        Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->nullable();
-            $table->string('email')->unique()->default($email);
+            $table->string('father_name')->nullable();
+            $table->string('mother_name')->nullable();
+            $table->string('father_city')->nullable();
+            $table->string('mother_city')->nullable();
+            $table->string('caste')->nullable();
+            $table->string('subcaste')->nullable();
             $table->string('mobile', 10)->unique()->nullable();
-            $table->string('password')->default($password);
             $table->string('gender')->default('Male');
             $table->string('dob', 10)->nullable();
-            $table->string('city')->nullable();
-            $table->string('state')->nullable();
+            $table->string('marital_status')->nullable();
+            $table->string('education')->nullable();
+            $table->string('occupation')->nullable();
+            $table->string('address')->nullable();
             $table->string('avatar')->default('avatar.png');
             $table->boolean('profile_updated')->default(false);
-            $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
