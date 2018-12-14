@@ -20,7 +20,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'mobile', 'password', 'type', 'gender', 'dob', 'experience', 'sebi_number', 'city', 'state', 'avatar', 'profile_updated'
+        'name', 'father_name', 'mother_name', 'father_city', 'mother_city', 'caste', 'sub_caste',
+        'mobile', 'gender', 'dob', 'marital_status', 'education', 'occupation',
+        'address', 'avatar', 'caste_updated', 'profile_updated', 'family_updated', 'created_at', 'updated_at'
     ];
 
     /**
@@ -29,7 +31,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'remember_token',
     ];
 
     /**
@@ -40,19 +42,4 @@ class User extends Authenticatable
     protected $dispatchesEvents = [
         'created' => UserWasCreated::class
     ];
-
-    /**
-     * Make sure to auto lowercase email field
-     *
-     * @var array
-     */
-    public function setEmailAttribute($email)
-    {
-        $this->attributes['email'] = strtolower($email);
-    }
-
-    public function quiz()
-    {
-        return $this->hasMany(QuizParticipant::class, 'participant_id');
-    }
 }

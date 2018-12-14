@@ -10,7 +10,6 @@ class UserController extends Controller
     public function me()
     {
         $user = auth()->user();
-        $user->load('quiz');
 
         $wallet = $user->wallet;
         $transactions = $wallet->transactions;
