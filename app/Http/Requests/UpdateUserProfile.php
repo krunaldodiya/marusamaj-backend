@@ -24,7 +24,13 @@ class UpdateUserProfile extends FormRequest
     public function rules()
     {
         return [
-            'mobile' => 'required|numeric|digits:10',
+            'name' => 'required',
+            'dob' => 'required',
+            'gender' => 'required',
+            'marital_status' => 'required',
+            'education' => 'required',
+            'occupation' => 'required',
+            'profile_updated' => 'required',
         ];
     }
 }

@@ -24,7 +24,9 @@ class UpdateUserCaste extends FormRequest
     public function rules()
     {
         return [
-            'mobile' => 'required|numeric|digits:10',
+            'caste_id' => 'required',
+            'sub_caste_id' => 'required',
+            'caste_updated' => 'required',
         ];
     }
 }
