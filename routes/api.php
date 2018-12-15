@@ -8,6 +8,7 @@ Route::group(['prefix' => 'auth'], function () {
 Route::group(['prefix' => 'users', 'middleware' => 'auth:api'], function () {
     Route::post('/me', 'UserController@me');
     Route::post('/profile/create', 'UserController@createUserProfile');
+    Route::post('/profile/update', 'UserController@updateUserProfile');
 });
 
 Route::group(['prefix' => 'wallet', 'middleware' => 'auth:api'], function () {

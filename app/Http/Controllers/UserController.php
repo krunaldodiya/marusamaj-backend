@@ -30,7 +30,23 @@ class UserController extends Controller
     public function createUserProfile(CreateUserProfile $request)
     {
         $user = auth()->user();
-        $input = $request->only(['name', 'email', 'city', 'state', 'gender', 'type', 'profile_updated']);
+        $input = $request->only(['mobile']);
+
+        try {
+            $user->update($input);
+            $wallet = $user->wallet;
+            $transactions = $wallet->transactions;
+
+            return compact('user');
+        } catch (Exception $e) {
+            return ['error' => $e->getMessage()];
+        }
+    }
+
+    public function updateUserProfile(Request $request)
+    {
+        $user = auth()->user();
+        $input = $request->only(['caste_id', 'sub_caste_id', 'caste_updated']);
 
         try {
             $user->update($input);
