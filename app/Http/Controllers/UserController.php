@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Caste;
+use App\User;
 use App\Http\Requests\UpdateUserProfile;
 use App\Http\Requests\UpdateUserCaste;
 use App\Http\Requests\UpdateUserFamily;
@@ -66,5 +67,13 @@ class UserController extends Controller
         } catch (Exception $e) {
             return ['error' => $e->getMessage()];
         }
+    }
+
+    public function getAllUsers(Request $request)
+    {
+        $authUser = auth()->user();
+        $users = User::where(['caste_id' => $authUser['caste_id']])->get();
+
+        return compact('users');
     }
 }
