@@ -24,7 +24,10 @@ class UpdateUserFamily extends FormRequest
     public function rules()
     {
         return [
-            'mobile' => 'required|numeric|digits:10',
+            'father_name' => 'required',
+            'father_city' => 'required',
+            'mother_name' => 'required',
+            'mother_city' => 'required',
         ];
     }
 }
