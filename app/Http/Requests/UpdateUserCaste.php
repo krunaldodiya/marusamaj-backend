@@ -26,7 +26,6 @@ class UpdateUserCaste extends FormRequest
         return [
             'caste_id' => 'required',
             'sub_caste_id' => 'required',
-            'caste_updated' => 'required',
         ];
     }
 }

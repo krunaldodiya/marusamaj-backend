@@ -10,13 +10,16 @@ Route::group(['prefix' => 'users', 'middleware' => 'auth:api'], function () {
     Route::post('/all', 'UserController@getAllUsers');
     Route::post('/caste/update', 'UserController@updateUserCaste');
     Route::post('/profile/update', 'UserController@updateUserProfile');
-    Route::post('/family/update', 'UserController@updateUserFamily');
+});
+
+Route::group(['prefix' => 'family', 'middleware' => 'auth:api'], function () {
+    Route::post('/add', 'RelationController@addFamilyMember');
 });
 
 Route::group(['prefix' => 'wallet', 'middleware' => 'auth:api'], function () {
     Route::post('/info', 'UserController@wallet');
 });
 
-Route::group(['prefix' => 'castes', 'middleware' => 'auth:api'], function () {
+Route::group(['prefix' => 'castes'], function () {
     Route::post('/', 'CasteController@castes');
 });

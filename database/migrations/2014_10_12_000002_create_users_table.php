@@ -29,7 +29,6 @@ class CreateUsersTable extends Migration
             $table->string('avatar')->default('avatar.png');
             $table->boolean('caste_updated')->default(false);
             $table->boolean('profile_updated')->default(false);
-            $table->boolean('family_updated')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

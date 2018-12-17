@@ -58,20 +58,6 @@ class UserController extends Controller
         }
     }
 
-    public function updateUserFamily(UpdateUserFamily $request)
-    {
-        $user = auth()->user();
-        $input = $request->only(['father_name', 'father_city', 'mother_name', 'mother_city']);
-        $input['family_updated'] = true;
-
-        try {
-            $user->update($input);
-            return compact('user');
-        } catch (Exception $e) {
-            return ['error' => $e->getMessage()];
-        }
-    }
-
     public function getAllUsers(Request $request)
     {
         $authUser = auth()->user();
