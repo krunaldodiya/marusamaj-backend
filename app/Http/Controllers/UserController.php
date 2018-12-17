@@ -33,7 +33,8 @@ class UserController extends Controller
     public function updateUserCaste(UpdateUserCaste $request)
     {
         $user = auth()->user();
-        $input = $request->only(['caste_id', 'sub_caste_id', 'caste_updated']);
+        $input = $request->only(['caste_id', 'sub_caste_id']);
+        $input['caste_updated'] = true;
 
         try {
             $user->update($input);
@@ -46,7 +47,8 @@ class UserController extends Controller
     public function updateUserProfile(UpdateUserProfile $request)
     {
         $user = auth()->user();
-        $input = $request->only(['name', 'dob', 'education', 'occupation', 'gender', 'marital_status', 'profile_updated']);
+        $input = $request->only(['name', 'dob', 'education', 'occupation', 'gender', 'marital_status']);
+        $input['profile_updated'] = true;
 
         try {
             $user->update($input);
@@ -59,7 +61,8 @@ class UserController extends Controller
     public function updateUserFamily(UpdateUserFamily $request)
     {
         $user = auth()->user();
-        $input = $request->only(['father_name', 'father_city', 'mother_name', 'mother_city', 'family_updated']);
+        $input = $request->only(['father_name', 'father_city', 'mother_name', 'mother_city']);
+        $input['family_updated'] = true;
 
         try {
             $user->update($input);
