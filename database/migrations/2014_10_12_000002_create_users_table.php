@@ -17,8 +17,8 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name')->nullable();
             $table->string('city')->nullable();
-            $table->string('caste_id')->default(1);
-            $table->string('sub_caste_id')->default(1);
+            $table->string('caste_id')->nullable();
+            $table->string('sub_caste_id')->nullable();
             $table->string('mobile', 10)->unique()->nullable();
             $table->string('gender')->default('Male');
             $table->string('dob', 10)->nullable();
