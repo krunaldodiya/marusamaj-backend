@@ -47,7 +47,7 @@ class UserController extends Controller
     public function updateUserProfile(UpdateUserProfile $request)
     {
         $user = auth()->user();
-        $input = $request->only(['name', 'dob', 'education', 'occupation', 'city', 'gender', 'marital_status']);
+        $input = $request->only(['name', 'dob', 'education', 'occupation', 'father_city', 'mother_city', 'gender', 'marital_status']);
         $input['profile_updated'] = true;
 
         try {
