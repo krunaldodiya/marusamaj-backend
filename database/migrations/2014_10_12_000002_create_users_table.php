@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('education')->nullable();
             $table->string('occupation')->nullable();
             $table->string('address')->nullable();
-            $table->string('avatar')->default('avatar.png');
+            $table->string('avatar')->nullable();
             $table->boolean('caste_updated')->default(false);
             $table->boolean('profile_updated')->default(false);
             $table->rememberToken();

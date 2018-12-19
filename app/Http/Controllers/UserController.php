@@ -61,7 +61,7 @@ class UserController extends Controller
     public function getAllUsers(Request $request)
     {
         $authUser = auth()->user();
-        $users = User::where(['caste_id' => $authUser['caste_id']])->get();
+        $users = User::with('caste', 'sub_caste')->where(['caste_id' => $authUser['caste_id']])->get();
 
         return compact('users');
     }
