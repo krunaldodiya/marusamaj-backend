@@ -6,6 +6,8 @@ use App\Http\Requests\Login;
 use App\Http\Requests\Register;
 use App\User;
 use App\Exceptions\OtpVerificationFailed;
+use Error;
+use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
@@ -29,7 +31,10 @@ class AuthController extends Controller
                 return $this->getToken($username);
             }
 
-            throw new OtpVerificationFailed("Error, Try again later.");
+            throw ValidationException::withMessages([
+                'password' => ['Invalid Password.']
+            ]);
+
         } catch (Exception $e) {
             return ['error' => $e->getMessage()];
         }
