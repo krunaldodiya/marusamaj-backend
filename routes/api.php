@@ -1,8 +1,13 @@
 <?php
 
-Route::group(['prefix' => 'auth'], function () {
+Route::group(['prefix' => 'auth', 'middleware' => 'guest:api'], function () {
     Route::post('/request-otp', 'OtpController@requestOtp');
     Route::post('/verify-otp', 'OtpController@verifyOtp');
+});
+
+Route::group(['prefix' => 'guest', 'middleware' => 'guest:api'], function () {
+    Route::post('/login', 'AuthController@login');
+    Route::post('/register', 'AuthController@register');
 });
 
 Route::group(['prefix' => 'users', 'middleware' => 'auth:api'], function () {
