@@ -30,7 +30,8 @@ class UpdateUserProfile extends FormRequest
             'marital_status' => 'required',
             'education' => 'required',
             'occupation' => 'required',
-            'city' => 'required',
+            'father_city' => 'required',
+            'mother_city' => 'required',
         ];
     }
 }
