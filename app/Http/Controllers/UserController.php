@@ -13,7 +13,8 @@ class UserController extends Controller
 {
     public function me()
     {
-        $user = auth()->user();
+        $authUser = auth()->user();
+        $user = User::with('caste', 'sub_caste')->where(['id' => $authUser['id']])->first();
 
         $wallet = $user->wallet;
         $transactions = $wallet->transactions;
