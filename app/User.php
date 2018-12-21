@@ -21,8 +21,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'father_city', 'mother_city', 'caste_id', 'sub_caste_id', 'mobile', 'gender', 'dob', 'marital_status', 'education',
-        'occupation', 'address', 'avatar', 'caste_updated', 'profile_updated', 'created_at', 'updated_at'
+        'name', 'username', 'password', 'father_city', 'mother_city', 'caste_id', 'sub_caste_id', 'mobile', 'gender', 'dob', 'marital_status',
+        'education', 'occupation', 'address', 'avatar', 'caste_updated', 'profile_updated', 'created_at', 'updated_at'
     ];
 
     protected $appends = ['age'];
@@ -33,7 +33,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'remember_token',
+        'remember_token', 'password'
     ];
 
     /**
@@ -44,6 +44,11 @@ class User extends Authenticatable
     protected $dispatchesEvents = [
         'created' => UserWasCreated::class
     ];
+
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = bcrypt($password);
+    }
 
     public function getAgeAttribute()
     {
