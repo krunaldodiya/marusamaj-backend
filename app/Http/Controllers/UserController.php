@@ -66,4 +66,13 @@ class UserController extends Controller
 
         return compact('users');
     }
+
+    public function changeAvatar(Request $request)
+    {
+        $authUser = auth()->user();
+
+        $update = $authUser->update(['avatar' => $request->avatar]);
+
+        return ['success' => $update ? true : false];
+    }
 }

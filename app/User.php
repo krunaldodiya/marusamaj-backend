@@ -60,7 +60,12 @@ class User extends Authenticatable
         $avatar = $this->attributes['avatar'];
 
         if (is_null($avatar)) {
-            $avatar = $this->attributes['gender'] === 'Male' ? url('/images/man.png') : url('/images/woman.png');
+            $default_avatar = "https://res.cloudinary.com/marusamaj/image/upload/c_crop,h_256,w_256,x_0,y_0/v1545459450";
+            
+            $man = "${default_avatar}/man.png";
+            $woman = "${default_avatar}/woman.png";
+
+            $avatar = $this->attributes['gender'] === 'Male' ? $man : $woman;
         }
 
         return $avatar;
