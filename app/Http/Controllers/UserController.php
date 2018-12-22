@@ -61,8 +61,49 @@ class UserController extends Controller
 
     public function getAllUsers(Request $request)
     {
+        $limit = 10;
         $authUser = auth()->user();
-        $users = User::with('caste', 'sub_caste')->where(['caste_id' => $authUser['caste_id']])->get();
+        $users = User::with('caste', 'sub_caste')
+            ->where(['caste_id' => $authUser['caste_id']])
+            ->where(function ($query) use ($request) {
+                if ($request->has('filters')) {
+                    $filters = $request['filters'];
+
+                    if ($filters['keywords']) {
+                        $keywords = $filters['keywords'];
+
+                        $query
+                            ->where('name', 'LIKE', "%${keywords}%")
+                            ->orWhere('username', 'LIKE', "%${keywords}%")
+                            ->orWhere('mobile', 'LIKE', "%${keywords}%");
+                    }
+
+                    if ($filters['father_city']) {
+                        $query
+                            ->where('father_city', $filters['father_city']);
+                    }
+
+                    if ($filters['mother_city']) {
+                        $query
+                            ->where('mother_city', $filters['mother_city']);
+                    }
+
+                    if ($filters['gender'] && $filters['gender'] !== "Any") {
+                        $query
+                            ->where('gender', $filters['gender']);
+                    }
+
+                    if ($filters['marital_status'] && $filters['marital_status'] !== "Any") {
+                        $query
+                            ->where('marital_status', $filters['marital_status']);
+                    }
+
+                    return $query;
+                }
+
+                return $query;
+            })
+            ->paginate($limit);
 
         return compact('users');
     }
