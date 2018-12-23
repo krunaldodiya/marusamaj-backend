@@ -25,8 +25,8 @@ Route::group(['prefix' => 'avatar', 'middleware' => 'auth:api'], function () {
     Route::post('/change', 'UserController@changeAvatar');
 });
 
-Route::group(['prefix' => 'family', 'middleware' => 'auth:api'], function () {
-    Route::post('/add', 'RelationController@addFamilyMember');
+Route::group(['prefix' => 'relation', 'middleware' => 'auth:api'], function () {
+    Route::post('/request', 'RelativeController@requestRelation');
 });
 
 Route::group(['prefix' => 'wallet', 'middleware' => 'auth:api'], function () {

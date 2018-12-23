@@ -21,7 +21,7 @@ class UserController extends Controller
     public function me()
     {
         $authUser = auth()->user();
-        $user = User::with('caste', 'sub_caste')->where(['id' => $authUser['id']])->first();
+        $user = User::with('caste', 'sub_caste', 'relatives')->where(['id' => $authUser['id']])->first();
 
         $wallet = $user->wallet;
         $transactions = $wallet->transactions;
@@ -29,23 +29,16 @@ class UserController extends Controller
         return compact('user');
     }
 
-    public function wallet()
-    {
-        $user = auth()->user();
-        $wallet = $user->wallet;
-        $transactions = $wallet->transactions;
-
-        return compact('wallet');
-    }
-
     public function updateUserCaste(UpdateUserCaste $request)
     {
-        $user = auth()->user();
+        $authUser = auth()->user();
         $input = $request->only(['caste_id', 'sub_caste_id']);
         $input['caste_updated'] = true;
 
         try {
-            $user->update($input);
+            $authUser->update($input);
+            $user = User::with('caste', 'sub_caste', 'relatives')->where(['id' => $authUser['id']])->first();
+
             return compact('user');
         } catch (Exception $e) {
             return ['error' => $e->getMessage()];
@@ -54,12 +47,14 @@ class UserController extends Controller
 
     public function updateUserProfile(UpdateUserProfile $request)
     {
-        $user = auth()->user();
+        $authUser = auth()->user();
         $input = $request->only(['name', 'dob', 'education', 'occupation', 'father_city', 'mother_city', 'gender', 'marital_status']);
         $input['profile_updated'] = true;
 
         try {
-            $user->update($input);
+            $authUser->update($input);
+            $user = User::with('caste', 'sub_caste', 'relatives')->where(['id' => $authUser['id']])->first();
+
             return compact('user');
         } catch (Exception $e) {
             return ['error' => $e->getMessage()];
@@ -70,7 +65,7 @@ class UserController extends Controller
     {
         $limit = 10;
         $authUser = auth()->user();
-        $users = User::with('caste', 'sub_caste')
+        $users = User::with('caste', 'sub_caste', 'relatives')
             ->where(['caste_id' => $authUser['caste_id']])
             ->where(function ($query) use ($request) {
                 if ($request->has('filters')) {

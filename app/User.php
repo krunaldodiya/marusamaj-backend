@@ -71,6 +71,11 @@ class User extends Authenticatable
         return $avatar;
     }
 
+    public function relatives()
+    {
+        return $this->hasMany(Relative::class);
+    }
+
     public function caste()
     {
         return $this->belongsTo(Caste::class);

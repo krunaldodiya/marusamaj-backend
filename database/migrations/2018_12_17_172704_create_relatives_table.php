@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRelationTable extends Migration
+class CreateRelativesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateRelationTable extends Migration
      */
     public function up()
     {
-        Schema::create('relation', function (Blueprint $table) {
+        Schema::create('relatives', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('relative_id');
             $table->string('user_relation');
             $table->string('relative_relation');
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class CreateRelationTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('relation');
+        Schema::dropIfExists('relatives');
     }
 }
