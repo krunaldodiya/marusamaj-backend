@@ -17,6 +17,10 @@ Route::group(['prefix' => 'users', 'middleware' => 'auth:api'], function () {
     Route::post('/profile/update', 'UserController@updateUserProfile');
 });
 
+Route::group(['prefix' => 'users'], function () {
+    Route::post('/mobile', 'UserController@getUsersByMobile');
+});
+
 Route::group(['prefix' => 'avatar', 'middleware' => 'auth:api'], function () {
     Route::post('/change', 'UserController@changeAvatar');
 });

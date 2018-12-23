@@ -11,6 +11,13 @@ use App\Http\Requests\UpdateUserFamily;
 
 class UserController extends Controller
 {
+    public function getUsersByMobile(Request $request)
+    {
+        $users = User::where('mobile', $request->mobile)->get();
+
+        return compact('users');
+    }
+
     public function me()
     {
         $authUser = auth()->user();
