@@ -11,4 +11,9 @@ class Relative extends Model
     ];
 
     protected $dates = ['created_at', 'updated_at'];
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'from');
+    }
 }

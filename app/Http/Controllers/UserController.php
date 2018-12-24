@@ -21,7 +21,7 @@ class UserController extends Controller
     public function me()
     {
         $authUser = auth()->user();
-        $user = User::with('caste', 'sub_caste', 'relatives')->where(['id' => $authUser['id']])->first();
+        $user = User::with('caste', 'sub_caste', 'relatives.user.caste', 'relatives.user.sub_caste')->where(['id' => $authUser['id']])->first();
 
         $wallet = $user->wallet;
         $transactions = $wallet->transactions;
@@ -37,7 +37,7 @@ class UserController extends Controller
 
         try {
             $authUser->update($input);
-            $user = User::with('caste', 'sub_caste', 'relatives')->where(['id' => $authUser['id']])->first();
+            $user = User::with('caste', 'sub_caste', 'relatives.user.caste', 'relatives.user.sub_caste')->where(['id' => $authUser['id']])->first();
 
             return compact('user');
         } catch (Exception $e) {
@@ -53,7 +53,7 @@ class UserController extends Controller
 
         try {
             $authUser->update($input);
-            $user = User::with('caste', 'sub_caste', 'relatives')->where(['id' => $authUser['id']])->first();
+            $user = User::with('caste', 'sub_caste', 'relatives.user.caste', 'relatives.user.sub_caste')->where(['id' => $authUser['id']])->first();
 
             return compact('user');
         } catch (Exception $e) {
@@ -65,7 +65,7 @@ class UserController extends Controller
     {
         $limit = 10;
         $authUser = auth()->user();
-        $users = User::with('caste', 'sub_caste', 'relatives')
+        $users = User::with('caste', 'sub_caste', 'relatives.user.caste', 'relatives.user.sub_caste')
             ->where(['caste_id' => $authUser['caste_id']])
             ->where(function ($query) use ($request) {
                 if ($request->has('filters')) {

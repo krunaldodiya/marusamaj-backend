@@ -13,7 +13,7 @@ class AuthController extends Controller
 {
     public function getToken($username)
     {
-        $user = User::with('caste', 'sub_caste', 'relatives')->where(['username' => $username])->first();
+        $user = User::with('caste', 'sub_caste', 'relatives.user.caste', 'relatives.user.sub_caste')->where(['username' => $username])->first();
         $token = $user->createToken('SocialStock', [])->accessToken;
 
         return compact('user', 'token');

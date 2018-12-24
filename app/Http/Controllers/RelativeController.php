@@ -50,7 +50,7 @@ class RelativeController extends Controller
                 ]
             ]);
 
-            $user = User::with('caste', 'sub_caste', 'relatives')->where(['id' => $authUser['id']])->first();
+            $user = User::with('caste', 'sub_caste', 'relatives.user.caste', 'relatives.user.sub_caste')->where(['id' => $authUser['id']])->first();
             return compact('user');
         } catch (Exception $e) {
             return ['error' => $e->getMessage()];
@@ -67,7 +67,7 @@ class RelativeController extends Controller
                 ->orWhere(['from' => $to, 'to' => $from])
                 ->update(['status' => true]);
 
-            $user = User::with('caste', 'sub_caste', 'relatives')->where(['id' => $authUser['id']])->first();
+            $user = User::with('caste', 'sub_caste', 'relatives.user.caste', 'relatives.user.sub_caste')->where(['id' => $authUser['id']])->first();
             return compact('user');
         } catch (Exception $e) {
             return ['error' => $e->getMessage()];
@@ -84,7 +84,7 @@ class RelativeController extends Controller
                 ->orWhere(['from' => $to, 'to' => $from])
                 ->delete();
 
-            $user = User::with('caste', 'sub_caste', 'relatives')->where(['id' => $authUser['id']])->first();
+            $user = User::with('caste', 'sub_caste', 'relatives.user.caste', 'relatives.user.sub_caste')->where(['id' => $authUser['id']])->first();
             return compact('user');
         } catch (Exception $e) {
             return ['error' => $e->getMessage()];
