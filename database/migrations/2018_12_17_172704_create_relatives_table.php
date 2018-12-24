@@ -16,9 +16,10 @@ class CreateRelativesTable extends Migration
         Schema::create('relatives', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
-            $table->integer('relative_id');
-            $table->string('user_relation');
-            $table->string('relative_relation');
+            $table->integer('from');
+            $table->integer('to');
+            $table->string('from_relation');
+            $table->string('to_relation');
             $table->boolean('status')->default(false);
             $table->timestamps();
         });

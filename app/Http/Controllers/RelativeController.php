@@ -13,12 +13,23 @@ class RelativeController extends Controller
         $authUser = auth()->user();
 
         try {
-            Relative::create([
-                'user_id' => $authUser['id'],
-                'relative_id' => $request['relative_id'],
-                'user_relation' => $request['user_relation'],
-                'relative_relation' => $request['relative_relation'],
-                'status' => false
+            Relative::insert([
+                [
+                    'user_id' => $authUser['id'],
+                    'from' => $request['from'],
+                    'to' => $request['to'],
+                    'from_relation' => $request['from_relation'],
+                    'to_relation' => $request['to_relation'],
+                    'status' => false
+                ],
+                [
+                    'user_id' => $authUser['id'],
+                    'from' => $request['to'],
+                    'to' => $request['from'],
+                    'from_relation' => $request['to_relation'],
+                    'to_relation' => $request['from_relation'],
+                    'status' => false
+                ]
             ]);
 
             $user = User::with('caste', 'sub_caste', 'relatives')->where(['id' => $authUser['id']])->first();

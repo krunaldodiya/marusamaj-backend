@@ -61,7 +61,7 @@ class User extends Authenticatable
 
         if (is_null($avatar)) {
             $default_avatar = "https://res.cloudinary.com/marusamaj/image/upload/c_crop,h_256,w_256,x_0,y_0/v1545459450";
-            
+
             $man = "${default_avatar}/man.png";
             $woman = "${default_avatar}/woman.png";
 
@@ -73,7 +73,7 @@ class User extends Authenticatable
 
     public function relatives()
     {
-        return $this->hasMany(Relative::class);
+        return $this->hasMany(Relative::class, 'to');
     }
 
     public function caste()
