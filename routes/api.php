@@ -13,7 +13,7 @@ Route::group(['prefix' => 'guest', 'middleware' => 'guest:api'], function () {
 Route::group(['prefix' => 'users', 'middleware' => 'auth:api'], function () {
     Route::post('/me', 'UserController@me');
     Route::post('/all', 'UserController@getAllUsers');
-    Route::post('/caste/update', 'UserController@updateUserCaste');
+    Route::post('/caste/update', 'CasteController@updateUserCaste');
     Route::post('/profile/update', 'UserController@updateUserProfile');
 });
 

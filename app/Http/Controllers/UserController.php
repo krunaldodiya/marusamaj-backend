@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use App\Caste;
 use App\User;
 use App\Http\Requests\UpdateUserProfile;
-use App\Http\Requests\UpdateUserCaste;
-use App\Http\Requests\UpdateUserFamily;
 
 class UserController extends Controller
 {
@@ -29,27 +27,10 @@ class UserController extends Controller
         return compact('user');
     }
 
-    public function updateUserCaste(UpdateUserCaste $request)
-    {
-        $authUser = auth()->user();
-        $input = $request->only(['caste_id', 'sub_caste_id']);
-        $input['caste_updated'] = true;
-
-        try {
-            $authUser->update($input);
-            $user = User::with('caste', 'sub_caste', 'relatives.user.caste', 'relatives.user.sub_caste')->where(['id' => $authUser['id']])->first();
-
-            return compact('user');
-        } catch (Exception $e) {
-            return ['error' => $e->getMessage()];
-        }
-    }
-
     public function updateUserProfile(UpdateUserProfile $request)
     {
         $authUser = auth()->user();
-        $input = $request->only(['name', 'dob', 'education', 'occupation', 'father_city', 'mother_city', 'gender', 'marital_status']);
-        $input['profile_updated'] = true;
+        $input = $request->only(['name', 'dob', 'education', 'occupation', 'father_city', 'mother_city', 'gender', 'marital_status', 'profile_updated']);
 
         try {
             $authUser->update($input);
