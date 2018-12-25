@@ -10,6 +10,7 @@ Route::group(['prefix' => 'guest', 'middleware' => 'guest:api'], function () {
     Route::post('/register', 'AuthController@register');
 });
 
+
 Route::group(['prefix' => 'users', 'middleware' => 'auth:api'], function () {
     Route::post('/id', 'UserController@getUserById');
     Route::post('/me', 'UserController@me');
