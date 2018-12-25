@@ -174,9 +174,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\TelescopeServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Anand\LaravelPaytmWallet\PaytmWalletServiceProvider::class,
         RobinCSamuel\LaravelMsg91\LaravelMsg91ServiceProvider::class,
-        Weidner\Goutte\GoutteServiceProvider::class,
     ],
 
     /*
