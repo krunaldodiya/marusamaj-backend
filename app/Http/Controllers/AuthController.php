@@ -11,11 +11,20 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
-    public function getToken($username)
+    public function getToken($username, $action)
     {
-        $user = User::with('caste', 'sub_caste', 'relatives.user')->where(['username' => $username])->first();
-        $token = $user->createToken('SocialStock', [])->accessToken;
+        $user = User::with('caste', 'sub_caste', 'setting', 'relatives.user.setting')
+            ->where(['username' => $username])
+            ->first();
 
+        if ($action === 'register') {
+            $user->setting()->create([
+                'show_mobile' => $user['gender'] === 'Male' ? true : false,
+                'show_birthday' => $user['gender'] === 'Male' ? true : false
+            ]);
+        }
+
+        $token = $user->createToken('SocialStock', [])->accessToken;
         return compact('user', 'token');
     }
 
@@ -28,7 +37,7 @@ class AuthController extends Controller
             $auth = auth()->attempt(['username' => $username, 'password' => $password]);
 
             if ($auth) {
-                return $this->getToken($username);
+                return $this->getToken($username, 'login');
             }
 
             throw ValidationException::withMessages([
@@ -50,7 +59,7 @@ class AuthController extends Controller
             $createUser = User::create(['mobile' => $mobile, 'username' => $username, 'password' => $password]);
 
             if ($createUser) {
-                return $this->getToken($username);
+                return $this->getToken($username, 'register');
             }
 
             throw new OtpVerificationFailed("Error, Try again later.");

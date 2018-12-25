@@ -71,6 +71,11 @@ class User extends Authenticatable
         return $avatar;
     }
 
+    public function setting()
+    {
+        return $this->hasOne(Setting::class);
+    }
+
     public function relatives()
     {
         return $this->hasMany(Relative::class, 'to');
