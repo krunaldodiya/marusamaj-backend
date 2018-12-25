@@ -19,8 +19,8 @@ class AuthController extends Controller
 
         if ($action === 'register') {
             $user->setting()->create([
-                'show_mobile' => $user['gender'] === 'Male' ? true : false,
-                'show_birthday' => $user['gender'] === 'Male' ? true : false
+                'show_mobile' => false,
+                'show_birthday' => false
             ]);
         }
 
