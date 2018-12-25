@@ -96,6 +96,7 @@ class UserController extends Controller
 
                 return $query;
             })
+            ->orderBy('created_at', 'desc')
             ->paginate($limit);
 
         return compact('users');
