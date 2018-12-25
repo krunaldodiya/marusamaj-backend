@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0a65fd7546c88c061795f29e2bf091af",
+    "content-hash": "fd65e4ae60ee0ce27e2b0c801f59913b",
     "packages": [
         {
             "name": "defuse/php-encryption",
@@ -745,6 +745,49 @@
             ],
             "description": "Highlight PHP code in terminal",
             "time": "2018-09-29T18:48:56+00:00"
+        },
+        {
+            "name": "krunaldodiya/wallet",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kunaldodiya/wallet.git",
+                "reference": "ca44738faabfb99540bd339f5fce698682f16d40"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kunaldodiya/wallet/zipball/ca44738faabfb99540bd339f5fce698682f16d40",
+                "reference": "ca44738faabfb99540bd339f5fce698682f16d40",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "KD\\Wallet\\WalletServiceProvider"
+                    ],
+                    "aliases": {
+                        "Wallet": "KD\\Wallet\\WalletFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "KD\\Wallet\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "krunaldodiya",
+                    "email": "kunal.dodiya1@gmail.com"
+                }
+            ],
+            "description": "Laravel Wallet",
+            "time": "2018-11-19T15:53:31+00:00"
         },
         {
             "name": "laravel/framework",
