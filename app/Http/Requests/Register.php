@@ -15,18 +15,14 @@ class Register extends FormRequest
     public function rules()
     {
         return [
-            'mobile' => 'numeric|digits:10',
-            'username' => 'min:4|unique:users|regex:/^[0-9a-z.\-_]+$/',
-            'password' => 'min:4',
+            'mobile' => 'numeric|digits:10'
         ];
     }
 
     public function messages()
     {
         return [
-            'mobile.required' => 'Mobile is required',
-            'username.required' => 'Username is required',
-            'password.required' => 'Password is required',
+            'mobile.required' => 'Mobile is required'
         ];
     }
 

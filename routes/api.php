@@ -4,11 +4,11 @@ use App\User;
 
 Route::group(['prefix' => 'test', 'middleware' => 'guest:api'], function () {
     Route::get('/', function () {
-        $user = User::with('default_account')
+        $user = User::with('setting')
             ->where(['mobile' => '9426726815'])
             ->first();
 
-        return ['data' => $user->default_account->user_id];
+        return ['data' => $user->setting->user_id];
     });
 });
 

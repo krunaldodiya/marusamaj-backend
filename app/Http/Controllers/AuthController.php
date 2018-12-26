@@ -13,7 +13,7 @@ class AuthController extends Controller
 {
     public function getToken($authUser)
     {
-        $user = User::with('caste', 'sub_caste', 'setting', 'relatives.user.setting', 'default_account')
+        $user = User::with('caste', 'sub_caste', 'setting', 'relatives.user.setting')
             ->where(['id' => $authUser['id']])
             ->first();
 

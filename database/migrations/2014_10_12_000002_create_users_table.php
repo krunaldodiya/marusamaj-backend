@@ -13,19 +13,16 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        $username = "000000000000";
-        $password = "0000";
-
-        Schema::create('users', function (Blueprint $table) use ($username, $password) {
+        Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('username')->unique()->default($username);
-            $table->string('password')->default($password);
+            $table->string('uid')->unique()->nullable();
             $table->string('name')->nullable();
             $table->string('father_city')->nullable();
             $table->string('mother_city')->nullable();
             $table->string('caste_id')->nullable();
             $table->string('sub_caste_id')->nullable();
             $table->string('mobile', 10)->nullable();
+            $table->string('secondary_mobile', 10)->nullable();
             $table->string('gender')->default('Male');
             $table->string('dob', 10)->nullable();
             $table->string('marital_status')->default('Single');

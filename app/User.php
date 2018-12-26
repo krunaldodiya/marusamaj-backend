@@ -21,8 +21,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'username', 'password', 'father_city', 'mother_city', 'caste_id', 'sub_caste_id', 'mobile', 'gender', 'dob', 'marital_status',
-        'education', 'occupation', 'address', 'avatar', 'caste_updated', 'profile_updated', 'created_at', 'updated_at'
+        'uid', 'name', 'father_city', 'mother_city', 'caste_id', 'sub_caste_id', 'mobile', 'secondary_mobile', 'gender', 'dob',
+        'marital_status', 'education', 'occupation', 'address', 'avatar', 'caste_updated', 'profile_updated', 'created_at', 'updated_at'
     ];
 
     protected $appends = ['age'];
@@ -74,11 +74,6 @@ class User extends Authenticatable
     public function setting()
     {
         return $this->hasOne(Setting::class);
-    }
-
-    public function default_account()
-    {
-        return $this->hasOne(Account::class, 'mobile', 'mobile');
     }
 
     public function relatives()

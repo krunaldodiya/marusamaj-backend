@@ -15,16 +15,14 @@ class Login extends FormRequest
     public function rules()
     {
         return [
-            'username' => 'min:4|exists:users',
-            'password' => 'min:4',
+            'user_id' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'username.required' => 'Username is required',
-            'password.required' => 'Password is required',
+            'user_id.required' => 'User ID is required',
         ];
     }
 

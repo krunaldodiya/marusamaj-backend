@@ -29,7 +29,7 @@ class CasteController extends Controller
 
         try {
             $authUser->update($input);
-            $user = User::with('caste', 'sub_caste', 'setting', 'relatives.user.setting', 'default_account')->where(['id' => $authUser['id']])->first();
+            $user = User::with('caste', 'sub_caste', 'setting', 'relatives.user.setting')->where(['id' => $authUser['id']])->first();
 
             return compact('user');
         } catch (Exception $e) {
