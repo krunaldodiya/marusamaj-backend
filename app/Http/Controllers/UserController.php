@@ -57,7 +57,7 @@ class UserController extends Controller
         $limit = 10;
         $authUser = auth()->user();
         $users = User::with('caste', 'sub_caste', 'setting', 'relatives.user.setting')
-            ->where(['caste_id' => $authUser['caste_id']])
+            ->where(['caste_id' => $authUser['caste_id'], 'profile_updated' => true])
             ->where(function ($query) use ($request) {
                 if ($request->has('filters')) {
                     $filters = $request['filters'];

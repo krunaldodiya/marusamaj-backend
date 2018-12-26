@@ -58,7 +58,9 @@ class OtpController extends Controller
 
             if ($verifyOtp->message == 'otp_verified') {
                 $firstOrCreate = User::firstOrCreate(['mobile' => $mobile]);
-                $user = $firstOrCreate->email ? $firstOrCreate : User::find($firstOrCreate->id);
+                $user = User::with('caste', 'sub_caste', 'setting', 'relatives.user.setting')
+                    ->where(['id' => $firstOrCreate->id])
+                    ->first();
 
                 $token = $user->createToken('SocialStock', [])->accessToken;
                 return compact('user', 'token');

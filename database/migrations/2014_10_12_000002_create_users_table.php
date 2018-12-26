@@ -13,10 +13,13 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        $username = "000000000000";
+        $password = "0000";
+
+        Schema::create('users', function (Blueprint $table) use ($username, $password) {
             $table->increments('id');
-            $table->string('username')->unique();
-            $table->string('password');
+            $table->string('username')->unique()->default($username);
+            $table->string('password')->default($password);
             $table->string('name')->nullable();
             $table->string('father_city')->nullable();
             $table->string('mother_city')->nullable();
