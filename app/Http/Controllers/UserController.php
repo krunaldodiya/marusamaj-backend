@@ -19,7 +19,7 @@ class UserController extends Controller
     public function me()
     {
         $authUser = auth()->user();
-        $user = User::with('caste', 'sub_caste', 'setting', 'relatives.user.setting')->where(['id' => $authUser['id']])->first();
+        $user = User::with('caste', 'sub_caste', 'setting', 'relatives.user.setting', 'default_account')->where(['id' => $authUser['id']])->first();
 
         $wallet = $user->wallet;
         $transactions = $wallet->transactions;
@@ -29,7 +29,7 @@ class UserController extends Controller
 
     public function getUserById(Request $request)
     {
-        $user = User::with('caste', 'sub_caste', 'setting', 'relatives.user.setting')->where(['id' => $request['user_id']])->first();
+        $user = User::with('caste', 'sub_caste', 'setting', 'relatives.user.setting', 'default_account')->where(['id' => $request['user_id']])->first();
 
         $wallet = $user->wallet;
         $transactions = $wallet->transactions;
@@ -44,7 +44,7 @@ class UserController extends Controller
 
         try {
             $authUser->update($input);
-            $user = User::with('caste', 'sub_caste', 'setting', 'relatives.user.setting')->where(['id' => $authUser['id']])->first();
+            $user = User::with('caste', 'sub_caste', 'setting', 'relatives.user.setting', 'default_account')->where(['id' => $authUser['id']])->first();
 
             return compact('user');
         } catch (Exception $e) {
@@ -56,7 +56,7 @@ class UserController extends Controller
     {
         $limit = 10;
         $authUser = auth()->user();
-        $users = User::with('caste', 'sub_caste', 'setting', 'relatives.user.setting')
+        $users = User::with('caste', 'sub_caste', 'setting', 'relatives.user.setting', 'default_account')
             ->where(['caste_id' => $authUser['caste_id'], 'profile_updated' => true])
             ->where(function ($query) use ($request) {
                 if ($request->has('filters')) {

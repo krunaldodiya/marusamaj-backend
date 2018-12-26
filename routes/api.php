@@ -1,6 +1,18 @@
 <?php
 
-Route::group(['prefix' => 'auth', 'middleware' => 'guest:api'], function () {
+use App\User;
+
+Route::group(['prefix' => 'test', 'middleware' => 'guest:api'], function () {
+    Route::get('/', function () {
+        $user = User::with('default_account')
+            ->where(['mobile' => '9426726815'])
+            ->first();
+
+        return ['data' => $user->default_account->user_id];
+    });
+});
+
+Route::group(['prefix' => 'otp', 'middleware' => 'guest:api'], function () {
     Route::post('/request-otp', 'OtpController@requestOtp');
     Route::post('/verify-otp', 'OtpController@verifyOtp');
 });
@@ -10,8 +22,13 @@ Route::group(['prefix' => 'guest', 'middleware' => 'guest:api'], function () {
     Route::post('/register', 'AuthController@register');
 });
 
+Route::group(['prefix' => 'auth', 'middleware' => 'auth:api'], function () {
+    Route::post('/login', 'AuthController@login');
+    Route::post('/register', 'AuthController@register');
+});
 
 Route::group(['prefix' => 'users', 'middleware' => 'auth:api'], function () {
+
     Route::post('/id', 'UserController@getUserById');
     Route::post('/me', 'UserController@me');
     Route::post('/all', 'UserController@getAllUsers');

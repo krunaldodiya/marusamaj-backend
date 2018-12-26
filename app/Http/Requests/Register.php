@@ -15,9 +15,9 @@ class Register extends FormRequest
     public function rules()
     {
         return [
-            'mobile' => 'required|numeric|digits:10',
-            'username' => 'required|min:4|unique:users|regex:/^[0-9a-z.\-_]+$/',
-            'password' => 'required|min:4',
+            'mobile' => 'numeric|digits:10',
+            'username' => 'min:4|unique:users|regex:/^[0-9a-z.\-_]+$/',
+            'password' => 'min:4',
         ];
     }
 

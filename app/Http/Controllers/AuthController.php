@@ -11,18 +11,11 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
-    public function getToken($username, $action)
+    public function getToken($authUser)
     {
-        $user = User::with('caste', 'sub_caste', 'setting', 'relatives.user.setting')
-            ->where(['username' => $username])
+        $user = User::with('caste', 'sub_caste', 'setting', 'relatives.user.setting', 'default_account')
+            ->where(['id' => $authUser['id']])
             ->first();
-
-        if ($action === 'register') {
-            $user->setting()->create([
-                'show_mobile' => false,
-                'show_birthday' => false
-            ]);
-        }
 
         $token = $user->createToken('SocialStock', [])->accessToken;
         return compact('user', 'token');
@@ -30,14 +23,11 @@ class AuthController extends Controller
 
     public function login(Login $request)
     {
-        $username = $request->username;
-        $password = $request->password;
-
         try {
-            $auth = auth()->attempt(['username' => $username, 'password' => $password]);
+            $user = User::find($request->user_id);
 
-            if ($auth) {
-                return $this->getToken($username, 'login');
+            if ($user) {
+                return $this->getToken($user);
             }
 
             throw ValidationException::withMessages([
@@ -52,14 +42,12 @@ class AuthController extends Controller
     public function register(Register $request)
     {
         $mobile = $request->mobile;
-        $username = $request->username;
-        $password = $request->password;
 
         try {
-            $createUser = User::create(['mobile' => $mobile, 'username' => $username, 'password' => $password]);
+            $createUser = User::create(['mobile' => $mobile]);
 
-            if ($createUser) {
-                return $this->getToken($username, 'register');
+            if ($createUser && $createUser->setting()->create()) {
+                return $this->getToken($createUser);
             }
 
             throw new OtpVerificationFailed("Error, Try again later.");

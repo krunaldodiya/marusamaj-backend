@@ -76,6 +76,11 @@ class User extends Authenticatable
         return $this->hasOne(Setting::class);
     }
 
+    public function default_account()
+    {
+        return $this->hasOne(Account::class, 'mobile', 'mobile');
+    }
+
     public function relatives()
     {
         return $this->hasMany(Relative::class, 'to');
