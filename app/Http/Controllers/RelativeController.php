@@ -50,8 +50,10 @@ class RelativeController extends Controller
                 ]
             ]);
 
-            $user = User::with('caste', 'sub_caste', 'setting', 'relatives.user.setting')->where(['id' => $authUser['id']])->first();
-            return compact('user');
+            $from = User::with('caste', 'sub_caste', 'setting', 'relatives.user.setting')->where(['id' => $from])->first();
+            $to = User::with('caste', 'sub_caste', 'setting', 'relatives.user.setting')->where(['id' => $to])->first();
+
+            return compact('from', 'to');
         } catch (Exception $e) {
             return ['error' => $e->getMessage()];
         }
@@ -67,8 +69,10 @@ class RelativeController extends Controller
                 ->orWhere(['from' => $to, 'to' => $from])
                 ->update(['status' => true]);
 
-            $user = User::with('caste', 'sub_caste', 'setting', 'relatives.user.setting')->where(['id' => $authUser['id']])->first();
-            return compact('user');
+            $from = User::with('caste', 'sub_caste', 'setting', 'relatives.user.setting')->where(['id' => $from])->first();
+            $to = User::with('caste', 'sub_caste', 'setting', 'relatives.user.setting')->where(['id' => $to])->first();
+            
+            return compact('from', 'to');
         } catch (Exception $e) {
             return ['error' => $e->getMessage()];
         }
@@ -84,8 +88,10 @@ class RelativeController extends Controller
                 ->orWhere(['from' => $to, 'to' => $from])
                 ->delete();
 
-            $user = User::with('caste', 'sub_caste', 'setting', 'relatives.user.setting')->where(['id' => $authUser['id']])->first();
-            return compact('user');
+            $from = User::with('caste', 'sub_caste', 'setting', 'relatives.user.setting')->where(['id' => $from])->first();
+            $to = User::with('caste', 'sub_caste', 'setting', 'relatives.user.setting')->where(['id' => $to])->first();
+            
+            return compact('from', 'to');
         } catch (Exception $e) {
             return ['error' => $e->getMessage()];
         }
