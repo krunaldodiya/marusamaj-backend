@@ -11,7 +11,9 @@ class UserController extends Controller
 {
     public function getUsersByMobile(Request $request)
     {
-        $users = User::where('mobile', $request->mobile)->get();
+        $users = User::where('mobile', $request->mobile)
+            ->orWhere('secondary_mobile', $request->mobile)
+            ->get();
 
         return compact('users');
     }
