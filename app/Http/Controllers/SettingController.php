@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-use App\Http\Requests\Setting;
+use App\Http\Requests\UidSetting;
+use App\Http\Requests\MobileSetting;
 
 class SettingController extends Controller
 {
-    public function setMobileStatus(Setting $request)
+    public function setMobileStatus(Request $request)
     {
         $authUser = auth()->user();
         $setting = $request['setting'];
@@ -23,7 +24,7 @@ class SettingController extends Controller
         }
     }
 
-    public function setBirthdayStatus(Setting $request)
+    public function setBirthdayStatus(Request $request)
     {
         $authUser = auth()->user();
         $setting = $request['setting'];
@@ -38,7 +39,7 @@ class SettingController extends Controller
         }
     }
 
-    public function updateAadhaarCard(Setting $request)
+    public function updateAadhaarCard(UidSetting $request)
     {
         $authUser = auth()->user();
         $uid = $request['uid'];
@@ -53,7 +54,7 @@ class SettingController extends Controller
         }
     }
 
-    public function updateSecondaryMobile(Setting $request)
+    public function updateSecondaryMobile(MobileSetting $request)
     {
         $authUser = auth()->user();
         $secondary_mobile = $request['secondary_mobile'];

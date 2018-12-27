@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\JsonResponse;
 
-class Setting extends FormRequest
+class MobileSetting extends FormRequest
 {
     public function authorize()
     {
@@ -15,10 +15,7 @@ class Setting extends FormRequest
     public function rules()
     {
         return [
-            'setting.show_mobile' => 'boolean',
-            'setting.show_birthday' => 'boolean',
-            'uid' => 'numeric|digits:12',
-            'secondary_mobile' => 'numeric|digits:10',
+            'secondary_mobile' => 'required|numeric|digits:10',
         ];
     }
 
