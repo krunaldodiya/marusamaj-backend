@@ -1,6 +1,12 @@
 <?php
 
+use RobinCSamuel\LaravelMsg91\Facades\LaravelMsg91;
+
 Auth::routes();
+
+Route::get('/test', function () {
+    return LaravelMsg91::sendOtp("9426726815", "1234", "Your otp for phone verification is 1234");
+});
 
 Route::get('/', 'HomeController@index')->name('home');
 
