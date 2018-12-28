@@ -40,8 +40,6 @@ class OtpController extends Controller
         try {
             $requestOtp = $this->otpAuth($mobile, $otp, 'request', $production);
 
-            dump($requestOtp);
-            
             return $requestOtp ? ['mobile' => $mobile, 'otp' => $otp] : false;
         } catch (Exception $e) {
             return ['error' => $e->getMessage()];
