@@ -9,15 +9,6 @@ use App\Http\Requests\UpdateUserProfile;
 
 class UserController extends Controller
 {
-    public function getUsersByMobile(Request $request)
-    {
-        $users = User::where('mobile', $request->mobile)
-            ->orWhere('secondary_mobile', $request->mobile)
-            ->get();
-
-        return compact('users');
-    }
-
     public function me()
     {
         $authUser = auth()->user();
@@ -28,6 +19,16 @@ class UserController extends Controller
 
         return compact('user');
     }
+
+    public function getUsersByMobile(Request $request)
+    {
+        $users = User::where('mobile', $request->mobile)
+            ->orWhere('secondary_mobile', $request->mobile)
+            ->get();
+
+        return compact('users');
+    }
+
 
     public function getUserById(Request $request)
     {
