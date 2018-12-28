@@ -21,11 +21,11 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
         $this->hideSensitiveRequestDetails();
 
         Telescope::filter(function (IncomingEntry $entry) {
-            if ($this->app->isLocal()) {
-                return true;
-            }
-
             return true;
+
+            // if ($this->app->isLocal()) {
+            //     return true;
+            // }
             
             // return $entry->isReportableException() ||
             //     $entry->isFailedJob() ||
@@ -64,8 +64,8 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
     protected function gate()
     {
         Gate::define('viewTelescope', function ($user) {
-            return in_array($user->email, [
-                "kunal.dodiya1@gmail.com"
+            return in_array($user->mobile, [
+                "9426726815"
             ]);
         });
     }
