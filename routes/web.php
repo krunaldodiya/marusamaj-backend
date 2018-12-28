@@ -16,3 +16,8 @@ Route::group(['prefix' => 'payments'], function () {
     Route::post('/order-response', 'PaymentController@orderResponse')->name('paytm.order-response');
     Route::get('/order-status', 'PaymentController@orderStatus')->name('payments.order-status');
 });
+
+Route::group(['prefix' => 'admin', 'middleware' => 'guest'], function () {
+    Route::get('/login', 'AuthController@showLogin')->name('login.get');
+    Route::post('/login', 'AuthController@processLogin')->name('login.post');
+});
