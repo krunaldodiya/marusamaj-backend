@@ -70,7 +70,6 @@ class UserController extends Controller
 
                         $query
                             ->where('name', 'LIKE', "%${keywords}%")
-                            ->orWhere('username', 'LIKE', "%${keywords}%")
                             ->orWhere('mobile', 'LIKE', "%${keywords}%");
                     }
 
