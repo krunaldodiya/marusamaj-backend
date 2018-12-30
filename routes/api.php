@@ -17,6 +17,7 @@ Route::group(['prefix' => 'settings', 'middleware' => 'auth:api'], function () {
     Route::post('/set-birthday-status', 'SettingController@setBirthdayStatus');
     Route::post('/update-aadhaar-card', 'SettingController@updateAadhaarCard');
     Route::post('/update-secondary-mobile', 'SettingController@updateSecondaryMobile');
+    Route::post('/delete-account', 'SettingController@deleteAccount');
 });
 
 Route::group(['prefix' => 'otp', 'middleware' => 'guest:api'], function () {

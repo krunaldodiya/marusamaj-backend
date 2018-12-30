@@ -9,6 +9,19 @@ use App\Http\Requests\MobileSetting;
 
 class SettingController extends Controller
 {
+    public function deleteAccount(Request $request)
+    {
+        $authUser = auth()->user();
+
+        try {
+            $delete = $authUser->delete();
+
+            return ['deleted' => $delete ? true : false];
+        } catch (Exception $e) {
+            return ['error' => $e->getMessage()];
+        }
+    }
+
     public function setMobileStatus(Request $request)
     {
         $authUser = auth()->user();
