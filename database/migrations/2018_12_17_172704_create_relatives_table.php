@@ -15,7 +15,10 @@ class CreateRelativesTable extends Migration
     {
         Schema::create('relatives', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
+
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
             $table->integer('from');
             $table->integer('to');
             $table->string('from_relation');
